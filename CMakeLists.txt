@@ -18,6 +18,9 @@ add_compile_definitions(function_cache
   PRIVATE FC_CACHE_FILEPATH="${FC_CACHE_FILEPATH}"
 )
 
-target_include_directories(function_cache
-  PRIVATE ${CMAKE_HOME_DIRECTORY}/include
+
+add_executable(hash_sb
+  bin/hash_sandbox.cpp
 )
+
+include_directories(PRIVATE ${CMAKE_HOME_DIRECTORY}/include)
