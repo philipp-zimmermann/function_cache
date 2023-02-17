@@ -3,10 +3,11 @@
 
 
 #include <filesystem>
-#include <map>
+#include <unordered_map>
 #include <optional>
 #include <tuple>
 
+#include "tuple_hash.hpp"
 
 /// @brief This class implements a function wrapper that provides a cache. Calls to a
 ///        passed function `func` are cached, together with their results. If a cached
@@ -57,10 +58,10 @@ class Function_cache
   using Cache_key_t = std::tuple<Func_input...>;
   struct Cache_Entry {
     Func_output f_out_;
-    typename std::map<Cache_key_t, Cache_Entry>::iterator prev_;
-    typename std::map<Cache_key_t, Cache_Entry>::iterator next_;
+    typename std::unordered_map<Cache_key_t, Cache_Entry>::iterator prev_;
+    typename std::unordered_map<Cache_key_t, Cache_Entry>::iterator next_;
   };
-  using Cache_t = std::map<Cache_key_t, Cache_Entry>;
+  using Cache_t = std::unordered_map<Cache_key_t, Cache_Entry>;
 
 
   Func_output(*const func_)(Func_input...);
